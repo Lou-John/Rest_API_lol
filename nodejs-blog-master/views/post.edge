@@ -21,4 +21,37 @@
                 </div>
             </div>
         </div>
+        <!-- Comment form -->
+        @if(auth)
+        <div class="container pt-5">
+            <div class="container">
+                <form action="/post/{{post._id}}/comments" method="POST">
+                    <div class="form-group">
+                        <textarea class="form-control rounded-0" placeholder="Leave a comment here" id="floatingTextArea" rows="5" name ="comment"></textarea>
+                    </div>
+                    <div class="form-group pt-2">
+                        <button class="btn rounded-0 btn-primary w-100">Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @endif
+        <!-- Display comments -->
+        <div class="container pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="list-unstyled">
+                            @each(comment in post.comments)
+                            <li>
+                                <h5>{{ comment.author }}</h5>
+                                <p>{{ comment.comment }}</p>
+                            </li>
+                            @endeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 @endsection

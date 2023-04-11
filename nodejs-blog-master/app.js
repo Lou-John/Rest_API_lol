@@ -17,6 +17,7 @@ const homePageController = require("./controllers/homePage");
 const allPostsController = require("./controllers/allPosts");
 const storePostController = require("./controllers/storePost");
 const getPostController = require("./controllers/getPost");
+const getCommentController = require("./controllers/postComment")
 const createUserController = require("./controllers/createUser");
 const storeUserController = require("./controllers/storeUser");
 const loginController = require("./controllers/loginController");
@@ -41,7 +42,7 @@ app.use(
   })
 );
 app.use(connectFlash());
-app.use('/posts/store',storePost)
+app.use("/posts/store", storePost);
 app.use("*", async (req, res, next) => {
   const user = await User.findById(req.session.userId);
   edge.global("auth", req.session.userId);
@@ -51,28 +52,32 @@ app.use("*", async (req, res, next) => {
 
 app.set("views", `${__dirname}/views`);
 
- (async () => {
-    try {
-        await mongoose.connect("mongodb://0.0.0.0:27017/blog", {
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-        });
-        console.log("MongoDB Connected...");
-    } catch (err) {
-
-        console.error(err.message);
-        // Exit process with failure
-        process.exit(1);
-    }
+(async () => {
+  try {
+    await mongoose.connect("mongodb://0.0.0.0:27017/blog", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB Connected...");
+  } catch (err) {
+    console.error(err.message);
+    // Exit process with failure
+    process.exit(1);
+  }
 })();
 app.get("/", homePageController);
-app.get('/posts/new',authMiddleware, createPostController);
-app.get('/posts/all',allPostsController);
-app.post('/posts/store', storePost, storePostController);
-app.get('/post/:id', getPostController);
-app.get('/auth/register',redirectIfAuthenticatedMiddleware, createUserController);
-app.post('/users/register',storeUserController);
-app.get('/auth/login',redirectIfAuthenticatedMiddleware, loginController);
+app.get("/posts/new", authMiddleware, createPostController);
+app.get("/posts/all", allPostsController);
+app.post("/post/:id/comments", getCommentController);
+app.post("/posts/store", storePost, storePostController);
+app.get("/post/:id", getPostController);
+app.get(
+  "/auth/register",
+  redirectIfAuthenticatedMiddleware,
+  createUserController
+);
+app.post("/users/register", storeUserController);
+app.get("/auth/login", redirectIfAuthenticatedMiddleware, loginController);
 app.get("/auth/logout", logoutController);
-app.post('/users/login', loginUserController);
+app.post("/users/login", loginUserController);
 app.listen(3000, () => console.log("Website link: http://localhost:3000"));

@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   try {
     let id = req.params.id;
     if (mongoose.Types.ObjectId.isValid(id)) {
-      const post = await Post.findById(id);
+      const post = await Post.findById(id).populate('comments').exec();
       res.render("post", {
         post,
       });
