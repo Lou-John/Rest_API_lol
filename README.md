@@ -2,9 +2,9 @@
 
 run commands:
 
-cd nodejs-blog-master
-npm init -y
-npm i express
-npm install express-edge --save
-npm i -D -g nodemon
-nodemon app
+cd nodejs-blog-master<br>
+npm init -y<br>
+npm i express<br>
+npm install express-edge --save<br>
+npm i -D -g nodemon<br>
+nodemon app<br>
