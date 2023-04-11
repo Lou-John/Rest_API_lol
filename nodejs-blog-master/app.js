@@ -1,3 +1,4 @@
+// Calling dependencies
 const express = require("express");
 const app = new express();
 const expressEdge = require("express-edge");
@@ -8,10 +9,12 @@ const expressSession = require("express-session");
 const connectFlash = require("connect-flash");
 const User = require("./database/models/User");
 
+// Calling middleware
 const storePost = require("./middleware/storePost");
 const authMiddleware = require("./middleware/auth");
 const redirectIfAuthenticatedMiddleware = require("./middleware/redirectIfAuthenticated");
 
+// Calling the controllers
 const createPostController = require("./controllers/createPost");
 const homePageController = require("./controllers/homePage");
 const allPostsController = require("./controllers/allPosts");
@@ -71,6 +74,8 @@ app.set("views", `${__dirname}/views`);
     process.exit(1);
   }
 })();
+
+// Routing
 app.get("/", homePageController);
 app.get("/posts/new", authMiddleware, createPostController);
 app.get("/posts/all", allPostsController);
@@ -86,4 +91,6 @@ app.post("/users/register", storeUserController);
 app.get("/auth/login", redirectIfAuthenticatedMiddleware, loginController);
 app.get("/auth/logout", logoutController);
 app.post("/users/login", loginUserController);
+
+// Assigning a port
 app.listen(3000, () => console.log("Website link: http://localhost:3000"));
