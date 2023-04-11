@@ -17,7 +17,7 @@ const homePageController = require("./controllers/homePage");
 const allPostsController = require("./controllers/allPosts");
 const storePostController = require("./controllers/storePost");
 const getPostController = require("./controllers/getPost");
-const getCommentController = require("./controllers/postComment")
+const getCommentController = require("./controllers/postComment");
 const createUserController = require("./controllers/createUser");
 const storeUserController = require("./controllers/storeUser");
 const loginController = require("./controllers/loginController");
@@ -37,8 +37,11 @@ app.use(
   expressSession({
     secret: "secret",
     store: mongoStore.create({
-      mongoUrl: "mongodb+srv://lojostrydom:qqtHYZVcnkKgrpPL@assignement2db.5qrtjfu.mongodb.net/?retryWrites=true&w=majority",
+      mongoUrl:
+        "mongodb+srv://lojostrydom:qqtHYZVcnkKgrpPL@assignement2db.5qrtjfu.mongodb.net/?retryWrites=true&w=majority",
     }),
+    resave: true,
+    saveUninitialized: true,
   })
 );
 app.use(connectFlash());
@@ -54,10 +57,13 @@ app.set("views", `${__dirname}/views`);
 
 (async () => {
   try {
-    await mongoose.connect("mongodb+srv://lojostrydom:qqtHYZVcnkKgrpPL@assignement2db.5qrtjfu.mongodb.net/?retryWrites=true&w=majority", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(
+      "mongodb+srv://lojostrydom:qqtHYZVcnkKgrpPL@assignement2db.5qrtjfu.mongodb.net/?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
     console.log("MongoDB Connected...");
   } catch (err) {
     console.error(err.message);

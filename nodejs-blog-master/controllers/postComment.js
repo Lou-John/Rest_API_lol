@@ -19,12 +19,8 @@ module.exports = (req, res) => {
         } else {
           post.comments.push(result);
           post.save();
-
-          console.log("========Comments=======");
-          console.log(post.comments);
         }
       });
-      console.log(result);
       res.redirect("/");
     }
   });
