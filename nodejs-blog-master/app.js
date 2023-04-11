@@ -37,7 +37,7 @@ app.use(
   expressSession({
     secret: "secret",
     store: mongoStore.create({
-      mongoUrl: "mongodb://0.0.0.0:27017/blog",
+      mongoUrl: "mongodb+srv://lojostrydom:qqtHYZVcnkKgrpPL@assignement2db.5qrtjfu.mongodb.net/?retryWrites=true&w=majority",
     }),
   })
 );
@@ -54,7 +54,7 @@ app.set("views", `${__dirname}/views`);
 
 (async () => {
   try {
-    await mongoose.connect("mongodb://0.0.0.0:27017/blog", {
+    await mongoose.connect("mongodb+srv://lojostrydom:qqtHYZVcnkKgrpPL@assignement2db.5qrtjfu.mongodb.net/?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
