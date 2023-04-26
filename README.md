@@ -1,10 +1,10 @@
-# nodeJsBlog
+<h1>Node.js school project</h1>
 
-run commands:
+## Technologies used:
+- Javascript
+- Node.js
+- Git
+- Express
+- MongoDB
 
-cd nodejs-blog-master<br>
-npm init -y<br>
-npm i express<br>
-npm install express-edge --save<br>
-npm i -D -g nodemon<br>
-nodemon app<br>
+![image](https://user-images.githubusercontent.com/80677312/234567668-1c394643-0694-4d19-8cea-6b5593949d7d.png)
