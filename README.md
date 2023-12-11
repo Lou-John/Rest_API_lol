@@ -1,4 +1,4 @@
-<h1>REST API</h1>
+<h1>REST API for League of Legends blog</h1>
  
 ## Technologies used:
 - Node.js
